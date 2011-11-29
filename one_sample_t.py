@@ -21,10 +21,10 @@ import time
 import statsmodels.stats.diagnostic as smd
 import statsmodels.stats.power as smp
 import scipy.stats as stats
-import matplotlib.cm as cm
 import datasense as ds
 import pandas as pd
 import numpy as np
+
 
 def main():
     output_url = "one_sample_t_test.html"
@@ -52,10 +52,12 @@ def main():
     x = df['x'][df['x'].notna()]
     y = df['y'][df['y'].notna()]
     n = df['y'].count()
+    standard_deviation = y.std()
+    average = y.mean()
     parametric_statistics = ds.parametric_summary(
         series=y,
         decimals=3
-    )
+    ).to_string()
     print("Paametric statistics")
     print(parametric_statistics)
     nonparametric_statistics = ds.nonparametric_summary(
@@ -63,11 +65,51 @@ def main():
         alphap=1/3,
         betap=1/3,
         decimals=3
-    )
+    ).to_string()
     print()
     print("Non-paametric statistics")
     print(nonparametric_statistics)
     print()
+    print("Scenario 1")
+    print()
+    print(
+        "Ho:  𝜇  = specified value."
+        "The population average equals the specified value."
+    )
+    print(
+        "Ha:  𝜇  ≠ specified value."
+        "The population average does not equal the specified value."
+    )
+    print()
+    qdresult = stats.ttest_1samp(y, hypothesized_difference)
+    power = smp.ttest_power(
+        np.abs(
+            (hypothesized_difference - average) / standard_deviation
+        ),
+        nobs=n,
+        alpha=significance_level,
+        alternative='two-sided'
+    )
+    if qdresult.pvalue < significance_level:
+        print('statistically significant')
+        significant = pd.Series(
+            data={
+                "test statistic": qdresult.statistic,
+                "p value": qdresult.pvalue,
+                "power": power
+            }
+        ).round(decimals=3).to_string()
+        print(significant)
+    else:
+        print('not statistically significant')
+        not_significant = pd.Series(
+            data={
+                "test statistic": qdresult.statistic,
+                "p value": qdresult.pvalue,
+                "power": power
+            }
+        ).round(decimals=3).to_string()
+        print(not_significant)
     stop_time = time.time()
     ds.report_summary(
         start_time=start_time,
