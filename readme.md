@@ -12,7 +12,7 @@ I will write the methodology for this repository.
 
 # License
 
-Copyright (c) 2017 GILLES PILON <gillespilon@gmail.com>.
+Copyright (c) 2017 GILLES PILON <gillespilon13@gmail.com>.
 
 Permission to use, copy, modify, and distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
 
