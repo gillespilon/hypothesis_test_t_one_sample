@@ -9,7 +9,9 @@ A one-sample t test answers these questions:
 
 # Data
 
-I will write where to download the data.
+Download the data file:
+
+[data_one_sample_t.csv](https://drive.google.com/open?id=0BzrdQfHR2I5DYThaUUV3RkVpWEk)
 
 # Methodology
 
