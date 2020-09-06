@@ -26,7 +26,6 @@ axes_title = 'Normal Probability Plot'
 def main():
     # Generate the data
     y = np.random.normal(0, 1, 100)
-    x = list(range(100))
     # matplotlib.pyplot
     fig = plt.figure(figsize=figure_width_height)
     ax = fig.add_subplot(111)
