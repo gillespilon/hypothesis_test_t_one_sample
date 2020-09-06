@@ -21,11 +21,13 @@ figure_width_height = (8, 6)
 x_axis_label = 'Theoretical quantiles (osm)'
 y_axis_label = 'Ordered values (osr)'
 axes_title = 'Normal Probability Plot'
+file_name_graph_matplotlib = 'npp_matplotlib.svg'
+file_name_graph_pandas = 'npp_pandas.svg'
 
 
 def main():
     # Generate the data
-    y = np.random.normal(0, 1, 100)
+    y = np.random.normal(loc=0, scale=1, size=100)
     # matplotlib.pyplot
     fig = plt.figure(figsize=figure_width_height)
     ax = fig.add_subplot(111)
@@ -33,6 +35,7 @@ def main():
     ax.set_title(axes_title)
     ax.set_xlabel(x_axis_label)
     ax.set_ylabel(y_axis_label)
+    ax.figure.savefig(file_name_graph_matplotlib)
     # pandas.plot.scatter
     df = pd.DataFrame.from_dict({x_axis_label: osm,
                                  y_axis_label: osr})
@@ -41,11 +44,13 @@ def main():
     ax = df.plot.scatter(
         x=x_axis_label,
         y=y_axis_label,
-        title=axes_title,
         ax=ax
     )
     (osm, osr), (slope, intercept, r) = stats.probplot(y, plot=ax, fit=True)
-    ax.plot([-3, 3], [-3, 3], 'r-')
+    ax.set_title(axes_title)
+    ax.set_xlabel(x_axis_label)
+    ax.set_ylabel(y_axis_label)
+    ax.figure.savefig(file_name_graph_pandas)
 
 
 if __name__ == '__main__':
