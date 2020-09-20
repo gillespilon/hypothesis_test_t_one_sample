@@ -11,6 +11,7 @@ time -f '%e' ./pythonic_probability_plots_with_pyplot_or_pandas.py
 
 import matplotlib.pyplot as plt
 from scipy.stats import norm, probplot
+from scipy.stats import norm
 import pandas as pd
 
 figure_width_height = (8, 6)
