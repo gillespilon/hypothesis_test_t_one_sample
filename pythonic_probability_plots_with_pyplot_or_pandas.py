@@ -37,7 +37,10 @@ def main():
     ax.set_title(axes_title)
     ax.set_xlabel(x_axis_label)
     ax.set_ylabel(y_axis_label)
-    fig.savefig(file_name_graph_matplotlib)
+    fig.savefig(
+        fname=file_name_graph_matplotlib,
+        format='svg'
+    )
     # pandas.plot.scatter
     df = pd.DataFrame.from_dict({x_axis_label: osm,
                                  y_axis_label: osr})
@@ -56,7 +59,10 @@ def main():
     ax.set_title(axes_title)
     ax.set_xlabel(x_axis_label)
     ax.set_ylabel(y_axis_label)
-    fig.savefig(file_name_graph_pandas)
+    fig.savefig(
+        fname=file_name_graph_pandas,
+        format='svg'
+    )
 
 
 if __name__ == '__main__':
