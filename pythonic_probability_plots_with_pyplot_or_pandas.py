@@ -35,7 +35,7 @@ def main():
         fit=True
     )
     ax.set_title(axes_title)
-    ax.set_xlabel(x_axis_label)
+    ax.set_xlabel(xlabel=x_axis_label)
     ax.set_ylabel(y_axis_label)
     fig.savefig(
         fname=file_name_graph_matplotlib,
@@ -57,7 +57,7 @@ def main():
         fit=True
     )
     ax.set_title(axes_title)
-    ax.set_xlabel(x_axis_label)
+    ax.set_xlabel(xlabel=x_axis_label)
     ax.set_ylabel(y_axis_label)
     fig.savefig(
         fname=file_name_graph_pandas,
