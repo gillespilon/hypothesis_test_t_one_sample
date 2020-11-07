@@ -34,7 +34,7 @@ def main():
         plot=ax,
         fit=True
     )
-    ax.set_title(axes_title)
+    ax.set_title(label=axes_title)
     ax.set_xlabel(xlabel=x_axis_label)
     ax.set_ylabel(ylabel=y_axis_label)
     fig.savefig(
@@ -56,7 +56,7 @@ def main():
         plot=ax,
         fit=True
     )
-    ax.set_title(axes_title)
+    ax.set_title(label=axes_title)
     ax.set_xlabel(xlabel=x_axis_label)
     ax.set_ylabel(ylabel=y_axis_label)
     fig.savefig(
