@@ -36,7 +36,7 @@ def main():
     )
     ax.set_title(axes_title)
     ax.set_xlabel(xlabel=x_axis_label)
-    ax.set_ylabel(y_axis_label)
+    ax.set_ylabel(ylabel=y_axis_label)
     fig.savefig(
         fname=file_name_graph_matplotlib,
         format='svg'
@@ -58,7 +58,7 @@ def main():
     )
     ax.set_title(axes_title)
     ax.set_xlabel(xlabel=x_axis_label)
-    ax.set_ylabel(y_axis_label)
+    ax.set_ylabel(ylabel=y_axis_label)
     fig.savefig(
         fname=file_name_graph_pandas,
         format='svg'
