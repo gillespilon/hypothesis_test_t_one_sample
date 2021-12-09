@@ -110,7 +110,52 @@ def main():
             }
         ).round(decimals=3).to_string()
         print(not_significant)
+    print()
     stop_time = time.time()
+    print("Scenario 2")
+    print()
+    print(
+        "Ho:  𝜇  = specified value."
+        "The population average equals the specified value."
+    )
+    print(
+        "Ha:  𝜇  < specified value."
+        "The population average is less than the specified value."
+    )
+    print()
+    power = smp.ttest_power(
+        np.abs(
+            (hypothesized_difference - average) / standard_deviation
+        ),
+        nobs=n,
+        alpha=significance_level,
+        alternative='smaller'
+    )
+    if hypothesized_difference <= average:
+        pvalue2 = (1 - qdresult.pvalue / 2)
+    else:
+        pvalue2 = qdresult.pvalue / 2
+    if pvalue2 < significance_level:
+        print('statistically significant')
+        significant = pd.Series(
+            data={
+                "test statistic": qdresult.statistic,
+                "p value": pvalue2,
+                "power": power
+            }
+        ).round(decimals=3).to_string()
+        print(significant)
+    else:
+        print('not statistically significant')
+        not_significant = pd.Series(
+            data={
+                "test statistic": qdresult.statistic,
+                "p value": pvalue2,
+                "power": power
+            }
+        ).round(decimals=3).to_string()
+        print(not_significant)
+    print()
     ds.report_summary(
         start_time=start_time,
         stop_time=stop_time
