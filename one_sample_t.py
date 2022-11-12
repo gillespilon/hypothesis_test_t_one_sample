@@ -32,66 +32,27 @@ import pandas as pd
 import numpy as np
 
 
-def create_dataframe(
-    title: str, filetypes: List[Tuple[str, str]]
-) -> Tuple[pd.DataFrame, Path]:
-    """
-    Helper function to request Path of data file and create DataFrame.
-
-    Parameters
-    ----------
-    title : str
-        The title for the GUI window.
-    filetypes : List[Tuple[str, str]]
-        The list of acceptable data file types.
-
-    Returns
-    -------
-    df : pd.DataFrame
-        The DataFrame of data.
-    path_in : Path
-        The Path of the input data file.
-
-    Example
-    -------
-    >>> df, path_in = create_dataframe(
-    >>>     title=path_in_title, filetypes=filetypes
-    >>> )
-    """
-    initialdir = Path(__file__).parent.resolve()
-    path_in = ds.ask_open_file_name_path(
-        title=title, initialdir=initialdir, filetypes=filetypes
-    )
-    df = ds.read_file(file_name=path_in)
-    return (df, path_in)
-
-
 def main():
     filetypes = [("csv and feather files", ".csv .CSV .feather .FEATHER")]
     path_in_title = "Select csv or feather file to read"
+    initialdir = Path(__file__).parent.resolve()
     output_url = "one_sample_t_test.html"
     header_title = "One-sample t test"
     header_id = "one-smaple-t-test"
     hypothesized_difference = 400
     significance_level = 0.05
-    start_time = time.time()
     original_stdout = ds.html_begin(
         output_url=output_url,
         header_title=header_title,
         header_id=header_id
     )
-    # data = {
-    #     "x": [
-    #         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-    #         20, 21, 22, 23, 24, 25
-    #     ],
-    #     "y": [
-    #         211, 572, 558, 250, 478, 307, 184, 435, 460, 308, 188, 111, 676,
-    #         326, 142, 255, 205, 77, 190, 320, 407, 333, 488, 374, 409
-    #     ]
-    # }
-    # df = pd.DataFrame(data=data)
-    df, path_in = create_dataframe(title=path_in_title, filetypes=filetypes)
+    path_in = ds.ask_open_file_name_path(
+        title=path_in_title,
+        initialdir=initialdir,
+        filetypes=filetypes
+    )
+    start_time = time.time()
+    df = ds.read_file(file_name=path_in)
     columns = df.columns
     columnx = columns[0]
     columny = columns[1]
