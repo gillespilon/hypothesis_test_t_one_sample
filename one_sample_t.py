@@ -91,7 +91,7 @@ def main():
     print()
     qdresult = stats.ttest_1samp(y, hypothesized_difference)
     power = smp.ttest_power(
-        np.abs(
+        effect_size=np.absolute(
             (hypothesized_difference - average) / standard_deviation
         ),
         nobs=n,
