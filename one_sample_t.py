@@ -41,6 +41,7 @@ def main():
     header_id = "one-smaple-t-test"
     hypothesized_difference = 400
     significance_level = 0.05
+    decimals = 3
     original_stdout = ds.html_begin(
         output_url=output_url,
         header_title=header_title,
@@ -64,7 +65,7 @@ def main():
     average = y.mean()
     parametric_statistics = ds.parametric_summary(
         series=y,
-        decimals=3
+        decimals=decimals
     ).to_string()
     print("Paametric statistics")
     print(parametric_statistics)
@@ -72,7 +73,7 @@ def main():
         series=y,
         alphap=1/3,
         betap=1/3,
-        decimals=3
+        decimals=decimals
     ).to_string()
     print()
     print("Non-paametric statistics")
@@ -106,7 +107,7 @@ def main():
                 "p value": qdresult.pvalue,
                 "power": power
             }
-        ).round(decimals=3).to_string()
+        ).round(decimals=decimals).to_string()
         print(significant)
     else:
         print('not statistically significant')
@@ -116,7 +117,7 @@ def main():
                 "p value": qdresult.pvalue,
                 "power": power
             }
-        ).round(decimals=3).to_string()
+        ).round(decimals=decimals).to_string()
         print(not_significant)
     print()
     stop_time = time.time()
@@ -151,7 +152,7 @@ def main():
                 "p value": pvalue2,
                 "power": power
             }
-        ).round(decimals=3).to_string()
+        ).round(decimals=decimals).to_string()
         print(significant)
     else:
         print('not statistically significant')
@@ -161,7 +162,7 @@ def main():
                 "p value": pvalue2,
                 "power": power
             }
-        ).round(decimals=3).to_string()
+        ).round(decimals=decimals).to_string()
         print(not_significant)
     print()
     print("Scenario 3")
@@ -195,7 +196,7 @@ def main():
                 "p value": pvalue3,
                 "power": power
             }
-        ).round(decimals=3).to_string()
+        ).round(decimals=decimals).to_string()
         print(significant)
     else:
         print('not statistically significant')
@@ -205,7 +206,7 @@ def main():
                 "p value": pvalue3,
                 "power": power
             }
-        ).round(decimals=3).to_string()
+        ).round(decimals=decimals).to_string()
         print(not_significant)
     print()
     ds.report_summary(
