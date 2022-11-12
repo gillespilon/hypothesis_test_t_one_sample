@@ -133,7 +133,7 @@ def main():
     )
     print()
     power = smp.ttest_power(
-        np.abs(
+        effect_size=np.absolute(
             (hypothesized_difference - average) / standard_deviation
         ),
         nobs=n,
@@ -177,7 +177,7 @@ def main():
     )
     print()
     power = smp.ttest_power(
-        np.abs(
+        effect_size=np.absolute(
             (hypothesized_difference - average) / standard_deviation
         ),
         nobs=n,
