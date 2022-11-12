@@ -18,6 +18,9 @@ The first column of the dataset must be the "x" and can be labelled in any
 manner you wish. It is a series of integers that are sample IDs.
 The second column of the dataset must be the "y" and can be labelled in any
 manner you wish. It is a series of integers or floats.
+
+Requires:
+- datasense https://github.com/gillespilon/datasense
 """
 
 from typing import IO, List, NoReturn, Tuple, Union
@@ -52,7 +55,12 @@ def main():
         initialdir=initialdir,
         filetypes=filetypes
     )
-    start_time = time.time()
+    start_time = time.perf_counter()
+    ds.script_summary(
+        script_path=Path(__file__),
+        action="started at"
+    )
+    print("Data file", path_in)
     df = ds.read_file(file_name=path_in)
     columns = df.columns
     columnx = columns[0]
@@ -82,11 +90,11 @@ def main():
     print("Scenario 1")
     print()
     print(
-        "Ho:  𝜇  = specified value."
+        "Ho: 𝜇 = specified value."
         "The population average equals the specified value."
     )
     print(
-        "Ha:  𝜇  ≠ specified value."
+        "Ha: 𝜇 ≠ specified value."
         "The population average does not equal the specified value."
     )
     print()
@@ -120,15 +128,14 @@ def main():
         ).round(decimals=decimals).to_string()
         print(not_significant)
     print()
-    stop_time = time.time()
     print("Scenario 2")
     print()
     print(
-        "Ho:  𝜇  = specified value."
+        "Ho: 𝜇 = specified value."
         "The population average equals the specified value."
     )
     print(
-        "Ha:  𝜇  < specified value."
+        "Ha: 𝜇 < specified value."
         "The population average is less than the specified value."
     )
     print()
@@ -168,11 +175,11 @@ def main():
     print("Scenario 3")
     print()
     print(
-        "Ho:  𝜇  = specified value."
+        "Ho: 𝜇 = specified value."
         "The population average equals the specified value."
     )
     print(
-        "Ha:  𝜇  > specified value."
+        "Ha: 𝜇 > specified value."
         "The population average is greater than the specified value."
     )
     print()
@@ -209,6 +216,11 @@ def main():
         ).round(decimals=decimals).to_string()
         print(not_significant)
     print()
+    stop_time = time.perf_counter()
+    ds.script_summary(
+        script_path=Path(__file__),
+        action="finished at"
+    )
     ds.report_summary(
         start_time=start_time,
         stop_time=stop_time
