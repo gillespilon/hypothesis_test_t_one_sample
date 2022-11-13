@@ -45,27 +45,29 @@ def main():
     hypothesized_difference = 400
     significance_level = 0.05
     decimals = 3
-    original_stdout = ds.html_begin(
-        output_url=output_url,
-        header_title=header_title,
-        header_id=header_id
-    )
     path_in = ds.ask_open_file_name_path(
         title=path_in_title,
         initialdir=initialdir,
         filetypes=filetypes
     )
     start_time = time.perf_counter()
+    original_stdout = ds.html_begin(
+        output_url=output_url,
+        header_title=header_title,
+        header_id=header_id
+    )
     ds.script_summary(
         script_path=Path(__file__),
         action="started at"
     )
+    ds.style_graph()
     print("Data file", path_in)
+    print()
     df = ds.read_file(file_name=path_in)
     columns = df.columns
     columnx = columns[0]
     columny = columns[1]
-    print()
+    xlabel, ylabel = columnx, columny
     x = df[columnx][df[columnx].notna()]
     y = df[columny][df[columny].notna()]
     n = df[columny].count()
@@ -75,7 +77,7 @@ def main():
         series=y,
         decimals=decimals
     ).to_string()
-    print("Paametric statistics")
+    print("Parametric statistics")
     print(parametric_statistics)
     nonparametric_statistics = ds.nonparametric_summary(
         series=y,
@@ -84,7 +86,7 @@ def main():
         decimals=decimals
     ).to_string()
     print()
-    print("Non-paametric statistics")
+    print("Non-parametric statistics")
     print(nonparametric_statistics)
     print()
     print("Scenario 1")
