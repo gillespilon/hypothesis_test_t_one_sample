@@ -40,7 +40,7 @@ def main():
     output_url = "one_sample_t_test.html"
     header_title = "One-sample t test"
     header_id = "one-smaple-t-test"
-    hypothesized_difference = 400
+    hypothesized_value = 400
     significance_level = 0.05
     decimals = 3
     path_in = ds.ask_open_file_name_path(
@@ -95,10 +95,10 @@ def main():
         "The population average does not equal the specified value."
     )
     print()
-    qdresult = stats.ttest_1samp(y, hypothesized_difference)
+    qdresult = stats.ttest_1samp(a=y, popmean=hypothesized_value)
     power = smp.ttest_power(
         effect_size=np.absolute(
-            (hypothesized_difference - average) / standard_deviation
+            (hypothesized_value - average) / standard_deviation
         ),
         nobs=n,
         alpha=significance_level,
@@ -138,13 +138,13 @@ def main():
     print()
     power = smp.ttest_power(
         effect_size=np.absolute(
-            (hypothesized_difference - average) / standard_deviation
+            (hypothesized_value - average) / standard_deviation
         ),
         nobs=n,
         alpha=significance_level,
         alternative='smaller'
     )
-    if hypothesized_difference < average:
+    if hypothesized_value < average:
         pvalue2 = (1 - qdresult.pvalue / 2)
     else:
         pvalue2 = qdresult.pvalue / 2
@@ -182,13 +182,13 @@ def main():
     print()
     power = smp.ttest_power(
         effect_size=np.absolute(
-            (hypothesized_difference - average) / standard_deviation
+            (hypothesized_value - average) / standard_deviation
         ),
         nobs=n,
         alpha=significance_level,
         alternative='larger'
     )
-    if hypothesized_difference < average:
+    if hypothesized_value < average:
         pvalue3 = qdresult.pvalue / 2
     else:
         pvalue3 = (1 - qdresult.pvalue / 2)
