@@ -23,11 +23,9 @@ Requires:
 - datasense https://github.com/gillespilon/datasense
 """
 
-from typing import IO, List, NoReturn, Tuple, Union
 from pathlib import Path
 import time
 
-import statsmodels.stats.diagnostic as smd
 import statsmodels.stats.power as smp
 import scipy.stats as stats
 import datasense as ds
@@ -65,10 +63,7 @@ def main():
     print()
     df = ds.read_file(file_name=path_in)
     columns = df.columns
-    columnx = columns[0]
-    columny = columns[1]
-    xlabel, ylabel = columnx, columny
-    x = df[columnx][df[columnx].notna()]
+    columny = columns[0]
     y = df[columny][df[columny].notna()]
     n = df[columny].count()
     standard_deviation = y.std()
