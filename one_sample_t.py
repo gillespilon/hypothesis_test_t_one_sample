@@ -40,8 +40,9 @@ def main():
     output_url = "one_sample_t_test.html"
     header_title = "One-sample t test"
     header_id = "one-smaple-t-test"
-    hypothesized_value = 400
     significance_level = 0.05
+    hypothesized_value = 400
+    colour = "#0077bb"
     decimals = 3
     path_in = ds.ask_open_file_name_path(
         title=path_in_title,
@@ -213,6 +214,15 @@ def main():
         ).round(decimals=decimals).to_string()
         print(not_significant)
     print()
+    fig, ax = ds.plot_histogram(series=y)
+    ax.set_xlabel("Y (units)")
+    ax.set_ylabel("Count")
+    ax.set_title(label="Histogram")
+    fig.savefig(fname="histogram.svg", format="svg")
+    ds.html_figure(
+        file_name="histogram.svg",
+        caption="histogram.svg"
+    )
     stop_time = time.perf_counter()
     ds.script_summary(
         script_path=Path(__file__),
