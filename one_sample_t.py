@@ -114,6 +114,15 @@ def main():
         file_name="box_and_whisker.svg",
         caption="box_and_whisker.svg"
     )
+    fig, ax = ds.plot_scatter_y(y=y)
+    ax.set_title(label="Scatter plot\nSample")
+    ax.set_xlabel("X (Sample order)")
+    ax.set_ylabel("Y (units)")
+    fig.savefig(fname="scatter_sample.svg", format="svg")
+    ds.html_figure(
+        file_name="scatter_sample.svg",
+        caption="scatter_sample.svg"
+    )
     stop_time = time.perf_counter()
     ds.script_summary(
         script_path=Path(__file__),
