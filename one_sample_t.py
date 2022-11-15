@@ -83,6 +83,11 @@ def main():
     )
     print("Scenario 3")
     print()
+    result = ds.one_sample_t(
+        series=y,
+        hypothesized_value=hypothesized_value,
+        alternative_hypothesis="greater"
+    )
     fig, ax = ds.plot_histogram(series=y)
     ax.set_xlabel("Y (units)")
     ax.set_ylabel("Count")
