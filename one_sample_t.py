@@ -74,133 +74,15 @@ def main():
         hypothesized_value=hypothesized_value,
         alternative_hypothesis="two-sided"
     )
-    # print(
-    #     "Ho: 𝜇 = specified value."
-    #     "The population average equals the specified value."
-    # )
-    # print(
-    #     "Ha: 𝜇 ≠ specified value."
-    #     "The population average does not equal the specified value."
-    # )
-    # print()
-    # qdresult = stats.ttest_1samp(a=y, popmean=hypothesized_value)
-    # power = smp.ttest_power(
-    #     effect_size=np.absolute(
-    #         (hypothesized_value - average) / standard_deviation
-    #     ),
-    #     nobs=n,
-    #     alpha=significance_level,
-    #     alternative='two-sided'
-    # )
-    # if qdresult.pvalue < significance_level:
-    #     print('statistically significant')
-    #     significant = pd.Series(
-    #         data={
-    #             "test statistic": qdresult.statistic,
-    #             "p value": qdresult.pvalue,
-    #             "power": power
-    #         }
-    #     ).round(decimals=decimals).to_string()
-    #     print(significant)
-    # else:
-    #     print('not statistically significant')
-    #     not_significant = pd.Series(
-    #         data={
-    #             "test statistic": qdresult.statistic,
-    #             "p value": qdresult.pvalue,
-    #             "power": power
-    #         }
-    #     ).round(decimals=decimals).to_string()
-    #     print(not_significant)
-    # print()
     print("Scenario 2")
     print()
-    # print(
-    #     "Ho: 𝜇 = specified value."
-    #     "The population average equals the specified value."
-    # )
-    # print(
-    #     "Ha: 𝜇 < specified value."
-    #     "The population average is less than the specified value."
-    # )
-    # print()
-    # power = smp.ttest_power(
-    #     effect_size=np.absolute(
-    #         (hypothesized_value - average) / standard_deviation
-    #     ),
-    #     nobs=n,
-    #     alpha=significance_level,
-    #     alternative='smaller'
-    # )
-    # if hypothesized_value < average:
-    #     pvalue2 = (1 - qdresult.pvalue / 2)
-    # else:
-    #     pvalue2 = qdresult.pvalue / 2
-    # if pvalue2 < significance_level:
-    #     print('statistically significant')
-    #     significant = pd.Series(
-    #         data={
-    #             "test statistic": qdresult.statistic,
-    #             "p value": pvalue2,
-    #             "power": power
-    #         }
-    #     ).round(decimals=decimals).to_string()
-    #     print(significant)
-    # else:
-    #     print('not statistically significant')
-    #     not_significant = pd.Series(
-    #         data={
-    #             "test statistic": qdresult.statistic,
-    #             "p value": pvalue2,
-    #             "power": power
-    #         }
-    #     ).round(decimals=decimals).to_string()
-    #     print(not_significant)
-    # print()
+    result = ds.one_sample_t(
+        series=y,
+        hypothesized_value=hypothesized_value,
+        alternative_hypothesis="less"
+    )
     print("Scenario 3")
     print()
-    # print(
-    #     "Ho: 𝜇 = specified value."
-    #     "The population average equals the specified value."
-    # )
-    # print(
-    #     "Ha: 𝜇 > specified value."
-    #     "The population average is greater than the specified value."
-    # )
-    # print()
-    # power = smp.ttest_power(
-    #     effect_size=np.absolute(
-    #         (hypothesized_value - average) / standard_deviation
-    #     ),
-    #     nobs=n,
-    #     alpha=significance_level,
-    #     alternative='larger'
-    # )
-    # if hypothesized_value < average:
-    #     pvalue3 = qdresult.pvalue / 2
-    # else:
-    #     pvalue3 = (1 - qdresult.pvalue / 2)
-    # if pvalue3 < significance_level:
-    #     print('statistically significant')
-    #     significant = pd.Series(
-    #         data={
-    #             "test statistic": qdresult.statistic,
-    #             "p value": pvalue3,
-    #             "power": power
-    #         }
-    #     ).round(decimals=decimals).to_string()
-    #     print(significant)
-    # else:
-    #     print('not statistically significant')
-    #     not_significant = pd.Series(
-    #         data={
-    #             "test statistic": qdresult.statistic,
-    #             "p value": pvalue3,
-    #             "power": power
-    #         }
-    #     ).round(decimals=decimals).to_string()
-    #     print(not_significant)
-    # print()
     fig, ax = ds.plot_histogram(series=y)
     ax.set_xlabel("Y (units)")
     ax.set_ylabel("Count")
