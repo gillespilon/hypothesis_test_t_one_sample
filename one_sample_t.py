@@ -26,11 +26,7 @@ Requires:
 from pathlib import Path
 import time
 
-import statsmodels.stats.power as smp
-import scipy.stats as stats
 import datasense as ds
-import pandas as pd
-import numpy as np
 
 
 def main():
@@ -66,27 +62,35 @@ def main():
     columns = df.columns
     columny = columns[0]
     y = df[columny][df[columny].notna()]
-    n = df[columny].count()
     print("Scenario 1")
     print()
-    result = ds.one_sample_t(
+    ds.one_sample_t(
         series=y,
         hypothesized_value=hypothesized_value,
-        alternative_hypothesis="two-sided"
+        alternative_hypothesis="two-sided",
+        significance_level=0.05,
+        width=7,
+        decimals=3
     )
     print("Scenario 2")
     print()
-    result = ds.one_sample_t(
+    ds.one_sample_t(
         series=y,
         hypothesized_value=hypothesized_value,
-        alternative_hypothesis="less"
+        alternative_hypothesis="less",
+        significance_level=0.05,
+        width=7,
+        decimals=3
     )
     print("Scenario 3")
     print()
-    result = ds.one_sample_t(
+    ds.one_sample_t(
         series=y,
         hypothesized_value=hypothesized_value,
-        alternative_hypothesis="greater"
+        alternative_hypothesis="greater",
+        significance_level=0.05,
+        width=7,
+        decimals=3
     )
     fig, ax = ds.plot_histogram(series=y)
     ax.set_xlabel("Y (units)")
@@ -96,6 +100,19 @@ def main():
     ds.html_figure(
         file_name="histogram.svg",
         caption="histogram.svg"
+    )
+    fig, ax = ds.plot_boxplot(
+        series=y,
+        notch=True,
+        showmeans=True
+    )
+    ax.set_title(label="Box and whisker plot\nSample")
+    ax.set_xticks(ticks=[1], labels=["Sample"])
+    ax.set_ylabel("Y (units)")
+    fig.savefig(fname="box_and_whisker.svg", format="svg")
+    ds.html_figure(
+        file_name="box_and_whisker.svg",
+        caption="box_and_whisker.svg"
     )
     stop_time = time.perf_counter()
     ds.script_summary(
