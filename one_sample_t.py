@@ -27,6 +27,7 @@ from pathlib import Path
 import time
 
 import datasense as ds
+import pandas as pd
 
 
 def main():
@@ -40,11 +41,11 @@ def main():
     hypothesized_value = 400
     colour = "#0077bb"
     decimals = 3
-    path_in = ds.ask_open_file_name_path(
-        title=path_in_title,
-        initialdir=initialdir,
-        filetypes=filetypes
-    )
+    # path_in = ds.ask_open_file_name_path(
+    #     title=path_in_title,
+    #     initialdir=initialdir,
+    #     filetypes=filetypes
+    # )
     start_time = time.perf_counter()
     original_stdout = ds.html_begin(
         output_url=output_url,
@@ -56,10 +57,16 @@ def main():
         action="started at"
     )
     ds.style_graph()
-    print("Data file", path_in)
-    print()
-    df = ds.read_file(file_name=path_in)
-    series = df[df.columns[0]].dropna()
+    series = pd.Series(
+        data=[
+            211, 572, 558, 250, 478, 307, 184, 435, 460, 308, 188, 111, 676,
+            326, 142, 255, 205, 77, 190, 320, 407, 333, 488, 374, 409
+        ]
+    )
+    # print("Data file", path_in)
+    # print()
+    # df = ds.read_file(file_name=path_in)
+    # series = df[df.columns[0]].dropna()
     print("Scenario 1")
     print()
     ds.one_sample_t(
