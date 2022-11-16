@@ -59,13 +59,11 @@ def main():
     print("Data file", path_in)
     print()
     df = ds.read_file(file_name=path_in)
-    columns = df.columns
-    columny = columns[0]
-    y = df[columny][df[columny].notna()]
+    series = df[df.columns[0]].dropna()
     print("Scenario 1")
     print()
     ds.one_sample_t(
-        series=y,
+        series=series,
         hypothesized_value=hypothesized_value,
         alternative_hypothesis="two-sided",
         significance_level=0.05,
@@ -75,7 +73,7 @@ def main():
     print("Scenario 2")
     print()
     ds.one_sample_t(
-        series=y,
+        series=series,
         hypothesized_value=hypothesized_value,
         alternative_hypothesis="less",
         significance_level=0.05,
@@ -85,48 +83,66 @@ def main():
     print("Scenario 3")
     print()
     ds.one_sample_t(
-        series=y,
+        series=series,
         hypothesized_value=hypothesized_value,
         alternative_hypothesis="greater",
         significance_level=0.05,
         width=7,
         decimals=3
     )
-    fig, ax = ds.plot_histogram(series=y)
+    fig, ax = ds.plot_histogram(series=series)
     ax.set_xlabel("Y (units)")
     ax.set_ylabel("Count")
     ax.set_title(label="Histogram")
-    fig.savefig(fname="histogram.svg", format="svg")
+    fig.savefig(
+        fname="histogram.svg",
+        format="svg"
+    )
     ds.html_figure(
         file_name="histogram.svg",
         caption="histogram.svg"
     )
     fig, ax = ds.plot_boxplot(
-        series=y,
+        series=series,
         notch=True,
         showmeans=True
     )
     ax.set_title(label="Box and whisker plot")
-    ax.set_xticks(ticks=[1], labels=["Sample"])
+    ax.set_xticks(
+        ticks=[1],
+        labels=["Sample"]
+    )
     ax.set_ylabel("Y (units)")
-    fig.savefig(fname="box_and_whisker.svg", format="svg")
+    fig.savefig(
+        fname="box_and_whisker.svg",
+        format="svg"
+    )
     ds.html_figure(
         file_name="box_and_whisker.svg",
         caption="box_and_whisker.svg"
     )
-    fig, ax = ds.plot_scatter_y(y=y)
+    fig, ax = ds.plot_scatter_y(y=series)
     ax.set_title(label="Scatter plot")
     ax.set_xlabel("X (Sample order)")
     ax.set_ylabel("Y (units)")
-    fig.savefig(fname="scatter_sample.svg", format="svg")
+    fig.savefig(
+        fname="scatter_sample.svg",
+        format="svg"
+    )
     ds.html_figure(
         file_name="scatter_sample.svg",
         caption="scatter_sample.svg"
     )
-    fig, ax = ds.probability_plot(data=y, plot=ax)
+    fig, ax = ds.probability_plot(
+        data=series,
+        plot=ax
+    )
     ax.set_title(label="Normal Probability Plot")
     ax.set_xlabel(xlabel="Theoretical Quantiles")
-    fig.savefig(fname="normal_probability_plot.svg", format="svg")
+    fig.savefig(
+        fname="normal_probability_plot.svg",
+        format="svg"
+    )
     ds.html_figure(
         file_name="normal_probability_plot.svg",
         caption="normal_probability_plot.svg"
