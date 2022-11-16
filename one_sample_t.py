@@ -34,7 +34,7 @@ def main():
     filetypes = [("csv and feather files", ".csv .CSV .feather .FEATHER")]
     path_in_title = "Select csv or feather file to read"
     initialdir = Path(__file__).parent.resolve()
-    output_url = "one_sample_t_test.html"
+    output_url = "one_sample_t.html"
     header_title = "One-sample t test"
     header_id = "one-smaple-t-test"
     significance_level = 0.05
