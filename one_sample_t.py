@@ -75,7 +75,7 @@ def main():
         alternative_hypothesis="two-sided",
         significance_level=0.05,
         width=7,
-        decimals=3
+        decimals=decimals
     )
     print("Scenario 2")
     print()
@@ -85,7 +85,7 @@ def main():
         alternative_hypothesis="less",
         significance_level=0.05,
         width=7,
-        decimals=3
+        decimals=decimals
     )
     print("Scenario 3")
     print()
@@ -95,7 +95,7 @@ def main():
         alternative_hypothesis="greater",
         significance_level=0.05,
         width=7,
-        decimals=3
+        decimals=decimals
     )
     fig, ax = ds.plot_histogram(series=series)
     ax.set_xlabel("Y (units)")
