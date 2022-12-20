@@ -19,8 +19,8 @@ manner you wish. It is a series of integers that are sample IDs.
 The second column of the dataset must be the "y" and can be labelled in any
 manner you wish. It is a series of integers or floats.
 
-Requires:
-- datasense https://github.com/gillespilon/datasense
+Requires datasense:
+https://github.com/gillespilon/datasense
 """
 
 from pathlib import Path
